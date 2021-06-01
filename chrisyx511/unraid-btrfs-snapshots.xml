@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>unraid-btrfs-snapshots</Name>
+  <Repository>chrisyx511/unraid-btrfs-snapshots</Repository>
+  <Registry>https://hub.docker.com/r/chrisyx511/unraid-btrfs-snapshots/</Registry>
+  <Network>none</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>true</Privileged>
+  <Support>https://hub.docker.com/r/chrisyx511/unraid-btrfs-snapshots/</Support>
+  <Project/>
+  <Overview>Container for making Snapshots with BTRFS on the Unraid array.&#xD;
+&#xD;
+NOTE: This container HAS to run privileged, because btrfs snap commands only work with privileges.&#xD;
+&#xD;
+Basic options are configured in the template UI, here.&#xD;
+Read descriptions for configuration options.&#xD;
+&#xD;
+Custom backup intervals and scripts can be setup in appdata folder.&#xD;
+Templates availaible on https://github.com/ChrisYx511/docker-unraid-snapshots and in the config folder.&#xD;
+&#xD;
+For SMB ShadowCopy support ("Previous Versions" in Windows), copy this to your SMB Extra configuration&#xD;
+NOTE: If you have other VFS modules (i.e Recycle Bin, Enhanced MacOS interoperability, etc.) this won't work&#xD;
+&#xD;
+vfs objects = shadow_copy2&#xD;
+&#xD;
+shadow:sort = desc&#xD;
+&#xD;
+shadow:format = _UTC_%Y.%m.%d-%H.%M.%S&#xD;
+&#xD;
+shadow:localtime = no&#xD;
+&#xD;
+shadow:snapprefix = ^(monthly){0,1}(weekly){0,1}(daily){0,1}(hourly){0,1}$&#xD;
+&#xD;
+shadow:delimiter = _UTC_</Overview>
+  <Category/>
+  <WebUI/>
+  <TemplateURL/>
+  <Icon>/plugins/dynamix.docker.manager/images/question.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Container for making Snapshots with BTRFS on the Unraid array.&#xD;
+&#xD;
+NOTE: This container HAS to run privileged, because btrfs snap commands only work with privileges.&#xD;
+&#xD;
+Basic options are configured in the template UI, here.&#xD;
+Read descriptions for configuration options.&#xD;
+&#xD;
+Custom backup intervals and scripts can be setup in appdata folder.&#xD;
+Templates availaible on https://github.com/ChrisYx511/docker-unraid-snapshots and in the config folder.&#xD;
+&#xD;
+For SMB ShadowCopy support ("Previous Versions" in Windows), copy this to your SMB Extra configuration&#xD;
+NOTE: If you have other VFS modules (i.e Recycle Bin, Enhanced MacOS interoperability, etc.) this won't work&#xD;
+&#xD;
+vfs objects = shadow_copy2&#xD;
+&#xD;
+shadow:sort = desc&#xD;
+&#xD;
+shadow:format = _UTC_%Y.%m.%d-%H.%M.%S&#xD;
+&#xD;
+shadow:localtime = no&#xD;
+&#xD;
+shadow:snapprefix = ^(monthly){0,1}(weekly){0,1}(daily){0,1}(hourly){0,1}$&#xD;
+&#xD;
+shadow:delimiter = _UTC_</Description>
+  <Networking>
+    <Mode>none</Mode>
+    <Publish/>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/unraid-btrfs-snapshots</HostDir>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt</HostDir>
+      <ContainerDir>/mnt</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value>true</Value>
+      <Name>HOURLY_SNAP</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>24</Value>
+      <Name>HOURLY_SNAP_KEEP</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>true</Value>
+      <Name>DAILY_SNAP</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>7</Value>
+      <Name>DAILY_SNAP_KEEP</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>true</Value>
+      <Name>WEEKLY_SNAP</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>5</Value>
+      <Name>WEEKLY_SNAP_KEEP</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>true</Value>
+      <Name>MONTHLY_SNAP</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value>12</Value>
+      <Name>MONTHLY_SNAP_KEEP</Name>
+      <Mode/>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>EXCLUDE</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="Enable HOURLY Snapshots" Target="HOURLY_SNAP" Default="true" Mode="" Description="Whether to enable hourly snapshots of the array&#13;&#10;&#13;&#10;Options: true, false" Type="Variable" Display="always" Required="true" Mask="false">true</Config>
+  <Config Name="Number of HOURLY snapshots to keep" Target="HOURLY_SNAP_KEEP" Default="24" Mode="" Description="This number of hourly snapshots are kept and the rest are pruned. Options: Any interger" Type="Variable" Display="always" Required="false" Mask="false">24</Config>
+  <Config Name="Enable DAILY Snapshots" Target="DAILY_SNAP" Default="true" Mode="" Description="Whether to enable daily snapshots of the array Options: true, false" Type="Variable" Display="always" Required="true" Mask="false">true</Config>
+  <Config Name="Number of DAILY Snapshots to keep" Target="DAILY_SNAP_KEEP" Default="7" Mode="" Description="This number of daily snapshots are kept and the rest are pruned. Options: Any interger" Type="Variable" Display="always" Required="false" Mask="false">7</Config>
+  <Config Name="Enable WEEKLY Snapshots" Target="WEEKLY_SNAP" Default="true" Mode="" Description="Whether to enable weekly snapshots of the array Options: true, false" Type="Variable" Display="always" Required="true" Mask="false">true</Config>
+  <Config Name="Number of WEEKLY snapshots to keep" Target="WEEKLY_SNAP_KEEP" Default="5" Mode="" Description="This number of weekly snapshots are kept and the rest are pruned. Options: Any interger" Type="Variable" Display="always" Required="false" Mask="false">5</Config>
+  <Config Name="Enable MONTHLY Snapshots" Target="MONTHLY_SNAP" Default="true" Mode="" Description="Whether to enable monthly snapshots of the array Options: true, false" Type="Variable" Display="always" Required="true" Mask="false">true</Config>
+  <Config Name="Number of WEEKLY snapshots to keep" Target="MONTHLY_SNAP_KEEP" Default="12" Mode="" Description="This number of monthly snapshots are kept and the rest are pruned. Options: Any interger" Type="Variable" Display="always" Required="false" Mask="false">12</Config>
+  <Config Name="Excluded shares" Target="EXCLUDE" Default="" Mode="" Description="If any shares need to be excluded, list here. Options: Comma seperated list of names&#13;&#10;(Shares with spaces don't work)&#13;&#10;You can also exclude shares from specific backup schedules by adding a SCHEDULE_EXCLUDE variable (i.e. HOURLY_EXCLUDE). Do not repeat shares in EXCLUDE and SCHEDULE_EXCLUDE." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Appdata Folder" Target="/config" Default="/mnt/user/appdata/unraid-btrfs-snapshots" Mode="rw" Description="Appdata folder" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt/user/appdata/unraid-btrfs-snapshots</Config>
+  <Config Name="/mnt folder" Target="/mnt" Default="/mnt" Mode="rw" Description="Unraid disks folder, to make the snapshots" Type="Path" Display="advanced-hide" Required="true" Mask="false">/mnt</Config>
+</Container>
